@@ -1,40 +1,25 @@
-from connection import cursor,connect
-from table_creation import table_creation
-import time
+from connection import cursor, connect
 
-class Transactions:
+def create(value, type, category, description):
+    cursor.execute("""
+    INSERT INTO transactions (description, category, value, type)
+    VALUES (%s, %s, %s, %s)
+    """, (description, category, value, type))
+    connect.commit()
+    print('Dados inseridos com sucesso!')
 
-    def __init__(self,value,type,category,description):
-        self.value = value
-        self.type = type
-        self.category = category
-        self.description = description
+def read():
+    cursor.execute("SELECT id, transaction_date, value, description FROM transactions")
+    return cursor.fetchall()  # Retorna a lista para o arquivo da tela decidir como mostrar
 
-    def create (self):
-        cursor.execute("""
-        INSERT INTO transactions (description,category,value,type)
-        values (%s,%s,%s,%s)
-        """,(self.description,self.category,self.value,self.type))
+def update(transaction_id, new_value):
+    cursor.execute("""
+    UPDATE transactions SET value = %s WHERE id = %s
+    """, (new_value, transaction_id))
+    connect.commit()
+    print('Dados atualizados com sucesso!')
 
-        connect.commit()
-        time.sleep(3)
-        print('Dados inseridos com sucesso')
-    
-    def read ():
-        cursor.execute("""
-        SELECT ID,TRANSACTION_DATE,VALUE FROM transactions
-        """)
-
-        rows = cursor.fetchall()
-
-        for row in rows:
-            print(row)
-
-
-        
-
-
-
-
-
-
+def delete(transaction_id):
+    cursor.execute("DELETE FROM transactions WHERE id = %s", (transaction_id,))
+    connect.commit()
+    print("Transação deletada com sucesso!")
