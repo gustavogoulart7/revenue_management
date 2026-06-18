@@ -19,11 +19,18 @@ class Transactions:
         connect.commit()
         time.sleep(3)
         print('Dados inseridos com sucesso')
-
-
-new_transaction = Transactions('600.50', 'RECEITA','VENDA','VENDA REALIZADA DE FORMA ONLINE')
-new_transaction.create()
     
+    def read ():
+        cursor.execute("""
+        SELECT ID,TRANSACTION_DATE,VALUE FROM transactions
+        """)
+
+        rows = cursor.fetchall()
+
+        for row in rows:
+            print(row)
+
+
         
 
 
