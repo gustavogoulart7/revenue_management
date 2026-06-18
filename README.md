@@ -22,7 +22,8 @@ A estrutura do código foi projetada separando as responsabilidades de conexão 
 ```text
 fintrack/
 │
-├── database.py          # Gerenciamento da conexão com o Postgres e DDL (criação da tabela)
+├── connection.py        # Conexão com o banco de dados
+├── table_creation.py          # Criação da tabela caso não exista
 ├── main.py              # Lógica do CRUD, funções de agregação e interface/fluxo do usuário
 ├── .gitignore           # Arquivos e pastas ignorados pelo Git (ex: venv, __pycache__)
 └── README.md            # Documentação completa do projeto
