@@ -12,5 +12,3 @@ def table_creation ():
         """)
 
     connect.commit()
-
-print("Table Created")
