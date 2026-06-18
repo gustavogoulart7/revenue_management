@@ -1,4 +1,4 @@
-from connection import cursor
+from connection import cursor, connect
 
 def table_creation ():
     cursor.execute("""
@@ -10,5 +10,7 @@ def table_creation ():
             value NUMERIC (10,2),
             type VARCHAR (10));
         """)
+
+    connect.commit()
 
 print("Table Created")
